@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using MySpot.Api.Models;
+using MySpot.Api.Entities;
 using MySpot.Api.Services;
 
 namespace MySpot.Api.Controllers
@@ -12,7 +12,7 @@ namespace MySpot.Api.Controllers
 
         [HttpGet]
         public ActionResult<Reservation[]> Get()
-            => Ok(_service.GetAll());
+            => Ok(_service.GetAllWeekly());
 
         [HttpGet("{id:int}")]
         public ActionResult<Reservation> Get(int id)
