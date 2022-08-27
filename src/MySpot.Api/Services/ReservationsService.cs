@@ -15,8 +15,14 @@ namespace MySpot.Api.Services
 
         public int? Create(Reservation reservation)
         {
+            var now = DateTime.UtcNow.Date;
+            var pastDays = now.DayOfWeek is DayOfWeek.Sunday ? 7 : (int) now.DayOfWeek;
+            var remainingDays = 7 - pastDays;
+
+            if(!(reservation.Date.Date >= now && reservation.Date.Date <= now.AddDays(remainingDays)))
+                return default;
+
             reservation.Id = Id;
-            reservation.Date = DateTime.Now.AddDays(1).Date;
 
             if(_parkingSpotNames.All(x => x != reservation.ParkingSpotName))
                 return default;
@@ -36,6 +42,9 @@ namespace MySpot.Api.Services
         {
             var existingReservation = _reservations.SingleOrDefault(x => x.Id == reservation.Id);
             if(existingReservation is null)
+                return false;
+
+            if(existingReservation.Date <= DateTime.UtcNow.Date)
                 return false;
 
             existingReservation.LicencePlate = reservation.LicencePlate;
