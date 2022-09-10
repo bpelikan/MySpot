@@ -4,7 +4,7 @@ namespace MySpot.Api.Exceptions
     {
         public DateTime Date { get; }
         public InvalidReservationDateException(DateTime date) 
-            : base($"Reservation date: {date} is invalid.")
+            : base($"Reservation date: {date:d} is invalid.")
         {
             Date = date;
         }

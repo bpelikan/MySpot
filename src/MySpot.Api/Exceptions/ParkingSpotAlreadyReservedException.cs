@@ -6,7 +6,7 @@ namespace MySpot.Api.Exceptions
         public DateTime Date { get; }
 
         public ParkingSpotAlreadyReservedException(string parkingSpotName, DateTime date) 
-            : base($"Parking spot with name {parkingSpotName} is already reserved for date: {date}")
+            : base($"Parking spot with name {parkingSpotName} is already reserved for date: {date:d}")
         {
             ParkingSpotName = parkingSpotName;
             Date = date;

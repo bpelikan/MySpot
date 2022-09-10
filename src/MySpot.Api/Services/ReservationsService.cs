@@ -4,30 +4,30 @@ namespace MySpot.Api.Services
 {
     public sealed class ReservationsService
     {
-        private static WeeklyParkingSpot[] _weeklyParkingSpots = 
+        private static WeeklyParkingSpot[] WeeklyParkingSpots = 
         {
-            new (Guid.NewGuid(), DateTime.UtcNow.AddDays(-5), DateTime.UtcNow.AddDays(-5), "P1"),
-            new (Guid.NewGuid(), DateTime.UtcNow.AddDays(-5), DateTime.UtcNow.AddDays(-5), "P2"),
-            new (Guid.NewGuid(), DateTime.UtcNow.AddDays(-5), DateTime.UtcNow.AddDays(-5), "P3"),
-            new (Guid.NewGuid(), DateTime.UtcNow.AddDays(-5), DateTime.UtcNow.AddDays(-5), "P4"),
-            new (Guid.NewGuid(), DateTime.UtcNow.AddDays(-5), DateTime.UtcNow.AddDays(-5), "P5"),
+            new (Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow.AddDays(7), "P1"),
+            new (Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow.AddDays(7), "P2"),
+            new (Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow.AddDays(7), "P3"),
+            new (Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow.AddDays(7), "P4"),
+            new (Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow.AddDays(7), "P5"),
         };
 
         public IEnumerable<Reservation> GetAllWeekly() 
-            => _weeklyParkingSpots.SelectMany(x => x.Reservations);
+            => WeeklyParkingSpots.SelectMany(x => x.Reservations);
 
         public Reservation Get(Guid id)
             => GetAllWeekly().SingleOrDefault(x => x.Id == id);
 
-        public Guid? Create(Guid parkingSpotId, Reservation reservation)
+        public Guid? Create(Reservation reservation)
         {
-            var weeklyParkingSpot = _weeklyParkingSpots.SingleOrDefault(x => x.Id == parkingSpotId);
+            var weeklyParkingSpot = WeeklyParkingSpots.SingleOrDefault(x => x.Id == reservation.ParkingSpotId);
             if(weeklyParkingSpot is null)
                 return default;
 
-            
             reservation.Id = Guid.NewGuid();
             weeklyParkingSpot.AddReservation(reservation);
+            return reservation.Id;
         }
 
         public bool Update(Reservation reservation)

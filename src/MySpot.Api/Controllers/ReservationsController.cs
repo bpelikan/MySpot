@@ -5,8 +5,8 @@ using MySpot.Api.Services;
 namespace MySpot.Api.Controllers
 {
     [ApiController]
-    [Route("reservations")]
-    public class ReservationController : ControllerBase
+    [Route("[controller]")]
+    public class ReservationsController : ControllerBase
     {
         private readonly ReservationsService _service = new();
 
@@ -14,14 +14,14 @@ namespace MySpot.Api.Controllers
         public ActionResult<Reservation[]> Get()
             => Ok(_service.GetAllWeekly());
 
-        [HttpGet("{id:int}")]
-        public ActionResult<Reservation> Get(int id)
+        [HttpGet("{id:guid}")]
+        public ActionResult<Reservation> Get(Guid id)
         {
             var reservation = _service.Get(id);
             if(reservation is null)
                 return NotFound();
 
-            return reservation;
+            return Ok(reservation);
         }
 
         [HttpPost]
@@ -34,8 +34,8 @@ namespace MySpot.Api.Controllers
             return CreatedAtAction(nameof(Get), new {Id = id}, default);
         }
 
-        [HttpPut("{id:int}")]
-        public ActionResult Put(int id, Reservation reservation)
+        [HttpPut("{id:guid}")]
+        public ActionResult Put(Guid id, Reservation reservation)
         {
             reservation.Id = id;
             
@@ -46,8 +46,8 @@ namespace MySpot.Api.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id:int}")]
-        public ActionResult Delete(int id)
+        [HttpDelete("{id:guid}")]
+        public ActionResult Delete(Guid id)
         {
             var succeeded = _service.Delete(id);
             if(!succeeded)

@@ -4,7 +4,6 @@ namespace MySpot.Api.Exceptions
     {
         public CustomException(string message) : base(message)
         {
-            
         }
     }
 }

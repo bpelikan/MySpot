@@ -4,18 +4,19 @@ namespace MySpot.Api.Entities
 {
     public class WeeklyParkingSpot
     {
-        public Guid Id { get; }
-        public DateTime From { get; private set; }
-        public DateTime To { get; private set; }
-        public string Name { get; private set; }
-
-        public IEnumerable<Reservation> Reservations => _reservations;
         private readonly HashSet<Reservation> _reservations = new();
 
-        public WeeklyParkingSpot(Guid id, DateTime @from, DateTime to, string name)
+        public Guid Id { get; }
+        public DateTime From { get; }
+        public DateTime To { get; }
+        public string Name { get; }
+
+        public IEnumerable<Reservation> Reservations => _reservations;
+
+        public WeeklyParkingSpot(Guid id, DateTime from, DateTime to, string name)
         {
             Id = id;
-            From = @from;
+            From = from;
             To = to;
             Name = name;
         }
@@ -35,7 +36,7 @@ namespace MySpot.Api.Entities
             _reservations.Add(reservation);
         }
 
-        public void RemoveReservation(Guid guid)
+        public void RemoveReservation(Guid id)
             => _reservations.RemoveWhere(x => x.Id == id);
 
     }
