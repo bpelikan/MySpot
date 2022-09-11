@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using MySpot.Api.Commands;
+using MySpot.Api.DTO;
 using MySpot.Api.Entities;
 using MySpot.Api.Services;
 
@@ -11,11 +13,11 @@ namespace MySpot.Api.Controllers
         private readonly ReservationsService _service = new();
 
         [HttpGet]
-        public ActionResult<Reservation[]> Get()
+        public ActionResult<ReservationDto[]> Get()
             => Ok(_service.GetAllWeekly());
 
         [HttpGet("{id:guid}")]
-        public ActionResult<Reservation> Get(Guid id)
+        public ActionResult<ReservationDto> Get(Guid id)
         {
             var reservation = _service.Get(id);
             if(reservation is null)
@@ -25,35 +27,31 @@ namespace MySpot.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Reservation reservation)
+        public ActionResult Post(CreateReservation command)
         {
-            var id = _service.Create(reservation);
+            var id = _service.Create(command with {ReservationId = Guid.NewGuid()});
             if(id is null)
                 return BadRequest();
 
-            return CreatedAtAction(nameof(Get), new {Id = id}, default);
+            return CreatedAtAction(nameof(Get), new {id}, default);
         }
 
         [HttpPut("{id:guid}")]
-        public ActionResult Put(Guid id, Reservation reservation)
+        public ActionResult Put(Guid id, ChangeReservationLicensePlate command)
         {
-            reservation.Id = id;
-            
-            var succeeded = _service.Update(reservation);
-            if(!succeeded)
-                return BadRequest();
+            if(_service.Update(command with {ReservationId = id}))
+                return NoContent();
 
-            return NoContent();
+            return NotFound();
         }
 
         [HttpDelete("{id:guid}")]
         public ActionResult Delete(Guid id)
         {
-            var succeeded = _service.Delete(id);
-            if(!succeeded)
-                return BadRequest();
+            if(_service.Delete(new DeleteReservation(id)))
+                return NoContent();
 
-            return NoContent();
+            return NotFound();
         }
     }
 }
