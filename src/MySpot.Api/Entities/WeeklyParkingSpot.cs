@@ -11,7 +11,7 @@ namespace MySpot.Api.Entities
         public DateTime To { get; }
         public string Name { get; }
 
-        public IEnumerable<Reservation> Reservations => _reservations;
+        public IEnumerable<Reservation> Reservations => _reservations; //dojść do rezerwacji i sprawdzić czy można przypisać inną wartośc np rejestracji
 
         public WeeklyParkingSpot(Guid id, DateTime from, DateTime to, string name)
         {
@@ -21,11 +21,11 @@ namespace MySpot.Api.Entities
             Name = name;
         }
 
-        public void AddReservation(Reservation reservation)
+        public void AddReservation(Reservation reservation, DateTime now)
         {
             var isInvalidDate = reservation.Date.Date < From || 
                                 reservation.Date.Date > To || 
-                                reservation.Date.Date < DateTime.UtcNow.Date;
+                                reservation.Date.Date < now.Date;
             if(isInvalidDate)
                 throw new InvalidReservationDateException(reservation.Date);
                 
