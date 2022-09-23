@@ -1,4 +1,4 @@
-namespace MySpot.Api.Services
+namespace MySpot.Application.Services
 {
     public class Clock : IClock  //why not static?
     {

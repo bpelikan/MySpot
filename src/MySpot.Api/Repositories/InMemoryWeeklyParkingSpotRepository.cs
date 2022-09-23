@@ -1,7 +1,7 @@
 using MySpot.Core.Entities;
-using MySpot.Api.Services;
 using MySpot.Core.ValueObjects;
 using MySpot.Core.Repositories;
+using MySpot.Application.Services;
 
 namespace MySpot.Api.Repositories
 {

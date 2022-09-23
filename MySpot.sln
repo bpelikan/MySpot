@@ -1,25 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E5F9C583-039E-4C6C-B37A-E0E73A989107}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Api", "src\MySpot.Api\MySpot.Api.csproj", "{5E4DD256-0A21-4AF0-AEC9-04B632CEEECB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySpot.Api", "src\MySpot.Api\MySpot.Api.csproj", "{5E4DD256-0A21-4AF0-AEC9-04B632CEEECB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2967514C-111D-4C25-BC2F-827C4B31BDBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Tests.Unit", "tests\MySpot.Tests.Unit\MySpot.Tests.Unit.csproj", "{D7B17960-C732-40DD-A5FA-8B6DA92761B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySpot.Tests.Unit", "tests\MySpot.Tests.Unit\MySpot.Tests.Unit.csproj", "{D7B17960-C732-40DD-A5FA-8B6DA92761B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Core", "src\MySpot.Core\MySpot.Core.csproj", "{243D278B-6A6F-4C0D-96E9-FCC4F30D7E16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySpot.Core", "src\MySpot.Core\MySpot.Core.csproj", "{243D278B-6A6F-4C0D-96E9-FCC4F30D7E16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Application", "src\MySpot.Application\MySpot.Application.csproj", "{C0C16E8C-8F20-45D8-AF55-6341F27C96ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5E4DD256-0A21-4AF0-AEC9-04B632CEEECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -34,10 +33,21 @@ Global
 		{243D278B-6A6F-4C0D-96E9-FCC4F30D7E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{243D278B-6A6F-4C0D-96E9-FCC4F30D7E16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{243D278B-6A6F-4C0D-96E9-FCC4F30D7E16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0C16E8C-8F20-45D8-AF55-6341F27C96ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0C16E8C-8F20-45D8-AF55-6341F27C96ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0C16E8C-8F20-45D8-AF55-6341F27C96ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0C16E8C-8F20-45D8-AF55-6341F27C96ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5E4DD256-0A21-4AF0-AEC9-04B632CEEECB} = {E5F9C583-039E-4C6C-B37A-E0E73A989107}
 		{D7B17960-C732-40DD-A5FA-8B6DA92761B6} = {2967514C-111D-4C25-BC2F-827C4B31BDBC}
 		{243D278B-6A6F-4C0D-96E9-FCC4F30D7E16} = {E5F9C583-039E-4C6C-B37A-E0E73A989107}
+		{C0C16E8C-8F20-45D8-AF55-6341F27C96ED} = {E5F9C583-039E-4C6C-B37A-E0E73A989107}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {006D2E32-0C02-493B-8F2A-65D8F595DFDC}
 	EndGlobalSection
 EndGlobal

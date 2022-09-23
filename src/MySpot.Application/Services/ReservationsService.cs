@@ -1,11 +1,10 @@
-using Microsoft.VisualBasic;
-using MySpot.Api.Commands;
-using MySpot.Api.DTO;
+using MySpot.Application.Commands;
+using MySpot.Application.DTO;
 using MySpot.Core.Entities;
 using MySpot.Core.Repositories;
 using MySpot.Core.ValueObjects;
 
-namespace MySpot.Api.Services
+namespace MySpot.Application.Services
 {
     public sealed class ReservationsService : IReservationsService
     {
