@@ -1,5 +1,13 @@
+using MySpot.Infrastructure;
+using MySpot.Application;
+using MySpot.Core;
+
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+builder.Services
+    .AddCore()
+    .AddApplication()
+    .AddInfrastructure()
+    .AddControllers();
 
 var app = builder.Build();
 
