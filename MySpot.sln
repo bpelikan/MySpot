@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySpot.Core", "src\MySpot.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Application", "src\MySpot.Application\MySpot.Application.csproj", "{C0C16E8C-8F20-45D8-AF55-6341F27C96ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Infrastructure", "src\MySpot.Infrastructure\MySpot.Infrastructure.csproj", "{E028914E-A2D1-4DAF-84C8-4E52C241ACA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{C0C16E8C-8F20-45D8-AF55-6341F27C96ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0C16E8C-8F20-45D8-AF55-6341F27C96ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0C16E8C-8F20-45D8-AF55-6341F27C96ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E028914E-A2D1-4DAF-84C8-4E52C241ACA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E028914E-A2D1-4DAF-84C8-4E52C241ACA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E028914E-A2D1-4DAF-84C8-4E52C241ACA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E028914E-A2D1-4DAF-84C8-4E52C241ACA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{D7B17960-C732-40DD-A5FA-8B6DA92761B6} = {2967514C-111D-4C25-BC2F-827C4B31BDBC}
 		{243D278B-6A6F-4C0D-96E9-FCC4F30D7E16} = {E5F9C583-039E-4C6C-B37A-E0E73A989107}
 		{C0C16E8C-8F20-45D8-AF55-6341F27C96ED} = {E5F9C583-039E-4C6C-B37A-E0E73A989107}
+		{E028914E-A2D1-4DAF-84C8-4E52C241ACA4} = {E5F9C583-039E-4C6C-B37A-E0E73A989107}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {006D2E32-0C02-493B-8F2A-65D8F595DFDC}

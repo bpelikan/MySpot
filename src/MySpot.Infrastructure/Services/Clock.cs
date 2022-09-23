@@ -1,4 +1,6 @@
-namespace MySpot.Application.Services
+using MySpot.Application.Services;
+
+namespace MySpot.Infrastructure.Services
 {
     public class Clock : IClock  //why not static?
     {

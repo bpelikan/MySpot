@@ -1,5 +1,4 @@
 ﻿using MySpot.Application.Commands;
-using MySpot.Api.Repositories;
 using MySpot.Application.Services;
 using MySpot.Tests.Unit.Shared;
 using Shouldly;
@@ -7,6 +6,7 @@ using System;
 using System.Linq;
 using Xunit;
 using MySpot.Core.Repositories;
+using MySpot.Infrastructure.Repositories;
 
 namespace MySpot.Tests.Unit.Services
 {
