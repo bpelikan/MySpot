@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using Xunit;
 using MySpot.Core.Repositories;
-using MySpot.Infrastructure.Repositories;
+using MySpot.Infrastructure.DAL.Repositories;
 
 namespace MySpot.Tests.Unit.Services
 {
