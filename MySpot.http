@@ -4,6 +4,10 @@
        
 
 ###
+GET {{url}}
+
+
+###
 GET {{url}}/reservations
 
 
