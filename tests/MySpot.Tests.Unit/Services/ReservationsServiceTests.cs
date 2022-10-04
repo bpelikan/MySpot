@@ -7,19 +7,21 @@ using System.Linq;
 using Xunit;
 using MySpot.Core.Repositories;
 using MySpot.Infrastructure.DAL.Repositories;
+using System.Threading.Tasks;
+using MySpot.Core.ValueObjects;
 
 namespace MySpot.Tests.Unit.Services
 {
     public class ReservationsServiceTests
     {
         [Fact]
-        public void given_reservation_for_not_taken_date_create_reservation_should_succeed()
+        public async Task given_reservation_for_not_taken_date_create_reservation_should_succeed()
         {
-            var weeklyParkingSpot = _weeklyParkingSpotsRepository.GetAll().First();
+            var weeklyParkingSpot = (await _weeklyParkingSpotsRepository.GetAllAsync()).First();
             var command = new CreateReservation(weeklyParkingSpot.Id, Guid.NewGuid(),
-                DateTime.UtcNow.AddMinutes(5), "John Doe", "XYZ123");
+                _now.AddMinutes(5), "John Doe", "XYZ123");
 
-            var reservationId = _reservationsService.Create(command);
+            var reservationId = await _reservationsService.CreateAsync(command);
 
             reservationId.ShouldNotBeNull();
             reservationId.Value.ShouldBe(command.ReservationId);
@@ -31,9 +33,11 @@ namespace MySpot.Tests.Unit.Services
         private readonly IClock _clock;
         private readonly IWeeklyParkingSpotRepository _weeklyParkingSpotsRepository;
         private readonly IReservationsService _reservationsService;
+        private readonly DateTime _now;
 
         public ReservationsServiceTests()
-        { 
+        {
+            _now = DateTime.Parse("2022-09-22");
             _clock = new TestClock();
             _weeklyParkingSpotsRepository = new InMemoryWeeklyParkingSpotRepository(_clock);
             _reservationsService = new ReservationsService(_clock, _weeklyParkingSpotsRepository);
