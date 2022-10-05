@@ -11,7 +11,7 @@ namespace MySpot.Infrastructure.DAL.Repositories
 
         public InMemoryWeeklyParkingSpotRepository(IClock clock)
         {
-            _weeklyParkingSpots = new() 
+            _weeklyParkingSpots = new()
             {
                 new (Guid.Parse("00000000-0000-0000-0000-000000000001"), new Week(clock.Current()), "P1"),
                 new (Guid.Parse("00000000-0000-0000-0000-000000000002"), new Week(clock.Current()), "P2"),
