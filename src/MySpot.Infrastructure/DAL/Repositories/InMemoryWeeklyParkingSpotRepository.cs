@@ -3,7 +3,7 @@ using MySpot.Core.ValueObjects;
 using MySpot.Core.Repositories;
 using MySpot.Application.Services;
 
-namespace MySpot.Infrastructure.Repositories
+namespace MySpot.Infrastructure.DAL.Repositories
 {
     internal class InMemoryWeeklyParkingSpotRepository : IWeeklyParkingSpotRepository
     {
@@ -11,7 +11,7 @@ namespace MySpot.Infrastructure.Repositories
 
         public InMemoryWeeklyParkingSpotRepository(IClock clock)
         {
-            _weeklyParkingSpots = new() 
+            _weeklyParkingSpots = new()
             {
                 new (Guid.Parse("00000000-0000-0000-0000-000000000001"), new Week(clock.Current()), "P1"),
                 new (Guid.Parse("00000000-0000-0000-0000-000000000002"), new Week(clock.Current()), "P2"),
@@ -22,21 +22,28 @@ namespace MySpot.Infrastructure.Repositories
         }
 
 
-        public WeeklyParkingSpot Get(ParkingSpotId id)
-            => _weeklyParkingSpots.SingleOrDefault(x => x.Id == id);
+        public Task<WeeklyParkingSpot> GetAsync(ParkingSpotId id)
+            => Task.FromResult(_weeklyParkingSpots.SingleOrDefault(x => x.Id == id));
 
-        public IEnumerable<WeeklyParkingSpot> GetAll()
-            => _weeklyParkingSpots;
+        public Task<IEnumerable<WeeklyParkingSpot>> GetAllAsync()
+            => Task.FromResult(_weeklyParkingSpots.AsEnumerable());
 
-        public void Create(WeeklyParkingSpot weeklyParkingSpot)
-            => _weeklyParkingSpots.Add(weeklyParkingSpot);
-
-        public void Delete(WeeklyParkingSpot weeklyParkingSpot)
+        public Task CreateAsync(WeeklyParkingSpot weeklyParkingSpot)
         {
-            //reference type
+            _weeklyParkingSpots.Add(weeklyParkingSpot);
+            return Task.CompletedTask;
         }
 
-        public void Udpade(WeeklyParkingSpot weeklyParkingSpot)
-            => _weeklyParkingSpots.Remove(weeklyParkingSpot);
+        public Task UdpadeAsync(WeeklyParkingSpot weeklyParkingSpot)
+        {
+            //reference type
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteAsync(WeeklyParkingSpot weeklyParkingSpot)
+        { 
+            _weeklyParkingSpots.Remove(weeklyParkingSpot);
+            return Task.CompletedTask;
+        }
     }
 }
