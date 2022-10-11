@@ -9,6 +9,8 @@ using MySpot.Core.Repositories;
 using MySpot.Infrastructure.DAL.Repositories;
 using System.Threading.Tasks;
 using MySpot.Core.ValueObjects;
+using MySpot.Core.Abstractions;
+using MySpot.Core.DomainServices;
 
 namespace MySpot.Tests.Unit.Services
 {
@@ -33,6 +35,7 @@ namespace MySpot.Tests.Unit.Services
         private readonly IClock _clock;
         private readonly IWeeklyParkingSpotRepository _weeklyParkingSpotsRepository;
         private readonly IReservationsService _reservationsService;
+        //private readonly IParkingReservationService _parkingReservationService;
         private readonly DateTime _now;
 
         public ReservationsServiceTests()
@@ -41,6 +44,7 @@ namespace MySpot.Tests.Unit.Services
             _clock = new TestClock();
             _weeklyParkingSpotsRepository = new InMemoryWeeklyParkingSpotRepository(_clock);
             _reservationsService = new ReservationsService(_clock, _weeklyParkingSpotsRepository);
+            //_reservationsService = new ReservationsService(_clock, _weeklyParkingSpotsRepository, _parkingReservationService);
         }
         #endregion
     }

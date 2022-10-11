@@ -2,6 +2,7 @@ using MySpot.Core.Entities;
 using MySpot.Core.ValueObjects;
 using MySpot.Core.Repositories;
 using MySpot.Application.Services;
+using MySpot.Core.Abstractions;
 
 namespace MySpot.Infrastructure.DAL.Repositories
 {
@@ -28,7 +29,7 @@ namespace MySpot.Infrastructure.DAL.Repositories
         public Task<IEnumerable<WeeklyParkingSpot>> GetAllAsync()
             => Task.FromResult(_weeklyParkingSpots.AsEnumerable());
 
-        public Task CreateAsync(WeeklyParkingSpot weeklyParkingSpot)
+        public Task AddAsync(WeeklyParkingSpot weeklyParkingSpot)
         {
             _weeklyParkingSpots.Add(weeklyParkingSpot);
             return Task.CompletedTask;

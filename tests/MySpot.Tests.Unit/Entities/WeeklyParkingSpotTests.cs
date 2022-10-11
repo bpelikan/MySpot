@@ -17,8 +17,8 @@ namespace MySpot.Tests.Unit.Entities
         {
             //arange
             var invalidDate = DateTime.Parse(dateString);
-            var reservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, "John Doe",
-                "XYZ123", new Date(invalidDate));
+            var reservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, 
+                "John Doe", "XYZ123", new Date(invalidDate));
 
             //act
             var exception = Record.Exception(() => _weeklyParkingSpot.AddReservation(reservation, _now));
@@ -32,8 +32,10 @@ namespace MySpot.Tests.Unit.Entities
         public void given_reservation_for_already_exising_date_add_reservation_should_fail() 
         {
             var reservationDate = _now.AddDays(1);
-            var reservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, "John Doe", "XYZ123", new Date(reservationDate));
-            var nextReservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, "John Doe", "XYZ123", new Date(reservationDate));
+            var reservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, 
+                "John Doe", "XYZ123", new Date(reservationDate));
+            var nextReservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, 
+                "John Doe", "XYZ123", new Date(reservationDate));
             _weeklyParkingSpot.AddReservation(reservation, _now);
 
             var exception = Record.Exception(() => _weeklyParkingSpot.AddReservation(nextReservation, reservationDate));
@@ -46,7 +48,8 @@ namespace MySpot.Tests.Unit.Entities
         public void given_reservation_for_not_taken_date_add_reservation_should_succeed()
         {
             var reservationDate = _now.AddDays(1);
-            var reservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, "John Doe", "XYZ123", new Date(reservationDate));
+            var reservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, 
+                "John Doe", "XYZ123", new Date(reservationDate));
             
             _weeklyParkingSpot.AddReservation(reservation, _now);
 
