@@ -17,9 +17,10 @@ namespace MySpot.Core.DomainServices
             _policies = policies;
             _clock = clock;
         }
+        
 
         public void ReserveSpotForVehicle(IEnumerable<WeeklyParkingSpot> allWeeklyParkingSpots, JobTitle jobTitle, 
-            WeeklyParkingSpot parkingSpotToReserve, Reservation reservation)
+            WeeklyParkingSpot parkingSpotToReserve, VehicleReservation reservation)
         {
             var parkingSpotId = parkingSpotToReserve.Id;
             var policy = _policies.SingleOrDefault(x => x.CanBeApplied(jobTitle));
@@ -31,8 +32,20 @@ namespace MySpot.Core.DomainServices
                 throw new CannotReserveParkingSpotException(parkingSpotId);
 
             parkingSpotToReserve.AddReservation(reservation, new Date(_clock.Current()));
+        }
 
 
+        public void ReserveParkingForCleaning(IEnumerable<WeeklyParkingSpot> allWeeklyParkings, Date date)
+        {
+            foreach(var parkingSpot in allWeeklyParkings)
+            {
+                var reservationsForSameDate = parkingSpot.Reservations.Where(x => x.Date == date);
+                parkingSpot.RemoveReservations(reservationsForSameDate);
+
+                var cleaningReservation = new CleaningReservation(ReservationId.Create(), parkingSpot.Id, date);
+                parkingSpot.AddReservation(cleaningReservation, new Date(_clock.Current()));
+
+            }
         }
     }
 }

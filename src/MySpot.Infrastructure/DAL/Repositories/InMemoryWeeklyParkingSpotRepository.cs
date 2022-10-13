@@ -29,6 +29,15 @@ namespace MySpot.Infrastructure.DAL.Repositories
         public Task<IEnumerable<WeeklyParkingSpot>> GetAllAsync()
             => Task.FromResult(_weeklyParkingSpots.AsEnumerable());
 
+        public Task<IEnumerable<WeeklyParkingSpot>> GetByWeekAsync(Week week)
+        {
+            var result = _weeklyParkingSpots
+                .Where(x => x.Week == week)
+                .AsEnumerable();
+
+            return Task.FromResult(result);
+        }
+
         public Task AddAsync(WeeklyParkingSpot weeklyParkingSpot)
         {
             _weeklyParkingSpots.Add(weeklyParkingSpot);
