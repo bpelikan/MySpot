@@ -7,7 +7,8 @@ namespace MySpot.Core.Repositories
     {
         Task<WeeklyParkingSpot> GetAsync(ParkingSpotId id);
         Task<IEnumerable<WeeklyParkingSpot>> GetAllAsync();
-        Task CreateAsync(WeeklyParkingSpot weeklyParkingSpot);
+        Task<IEnumerable<WeeklyParkingSpot>> GetByWeekAsync(Week week) => throw new NotImplementedException();
+        Task AddAsync(WeeklyParkingSpot weeklyParkingSpot);
         Task UdpadeAsync(WeeklyParkingSpot weeklyParkingSpot);
         Task DeleteAsync(WeeklyParkingSpot weeklyParkingSpot);
     }

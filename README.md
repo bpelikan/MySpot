@@ -27,6 +27,8 @@ dotnet ef database
 dotnet ef migrations
 cd src/MySpot.Infrastructure
 dotnet ef migrations add Init -o ./DAL/Migrations --startup-project ../MySpot.Api
+dotnet ef migrations add Cleaning_Reservation --startup-project ../MySpot.Api/MySpot.Api.csproj --context MySpotDbContext -o ./DAL/Migrations
+dotnet ef migrations add Introducing_Capacity --startup-project ../MySpot.Api/MySpot.Api.csproj --context MySpotDbContext -o ./DAL/Migrations
 
 cd ../MySpot.Api
 dotnet ef database update

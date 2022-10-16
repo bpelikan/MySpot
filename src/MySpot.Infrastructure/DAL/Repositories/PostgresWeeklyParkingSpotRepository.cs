@@ -33,7 +33,17 @@ namespace MySpot.Infrastructure.DAL.Repositories
             return result.AsEnumerable();
         }
 
-        public async Task CreateAsync(WeeklyParkingSpot weeklyParkingSpot)
+        public async Task<IEnumerable<WeeklyParkingSpot>> GetByWeekAsync(Week week)
+        {
+            var result = await _dbContext.WeeklyParkingSpots
+                .Include(x => x.Reservations)
+                .Where(x => x.Week == week)
+                .ToListAsync();
+
+            return result.AsEnumerable();
+        }
+
+        public async Task AddAsync(WeeklyParkingSpot weeklyParkingSpot)
         {
             await _dbContext.AddAsync(weeklyParkingSpot);
             await _dbContext.SaveChangesAsync();

@@ -1,5 +1,4 @@
 ﻿using MySpot.Application.Commands;
-using MySpot.Application.Services;
 using MySpot.Tests.Unit.Shared;
 using Shouldly;
 using System;
@@ -9,6 +8,9 @@ using MySpot.Core.Repositories;
 using MySpot.Infrastructure.DAL.Repositories;
 using System.Threading.Tasks;
 using MySpot.Core.ValueObjects;
+using MySpot.Core.Abstractions;
+using MySpot.Core.DomainServices;
+using MySpot.Core.Policies;
 
 namespace MySpot.Tests.Unit.Services
 {
@@ -18,10 +20,10 @@ namespace MySpot.Tests.Unit.Services
         public async Task given_reservation_for_not_taken_date_create_reservation_should_succeed()
         {
             var weeklyParkingSpot = (await _weeklyParkingSpotsRepository.GetAllAsync()).First();
-            var command = new CreateReservation(weeklyParkingSpot.Id, Guid.NewGuid(),
-                _now.AddMinutes(5), "John Doe", "XYZ123");
+            var command = new ReserveParkingSpotForVehicle(weeklyParkingSpot.Id, Guid.NewGuid(),
+               1,  _now.AddMinutes(5), "John Doe", "XYZ123");
 
-            var reservationId = await _reservationsService.CreateAsync(command);
+            var reservationId = await _reservationsService.ReserveForVehicleAsync(command);
 
             reservationId.ShouldNotBeNull();
             reservationId.Value.ShouldBe(command.ReservationId);
@@ -40,7 +42,16 @@ namespace MySpot.Tests.Unit.Services
             _now = DateTime.Parse("2022-09-22");
             _clock = new TestClock();
             _weeklyParkingSpotsRepository = new InMemoryWeeklyParkingSpotRepository(_clock);
-            _reservationsService = new ReservationsService(_clock, _weeklyParkingSpotsRepository);
+
+            var parkingReservationService = new ParkingReservationService(new IReservationPolicy[]
+            {
+                new BossReservationPolicy(),
+                new ManagerReservationPolicy(),
+                new RegularEmployeeReservationPolicy(_clock)
+            },
+            _clock);
+
+            _reservationsService = new ReservationsService(_clock, _weeklyParkingSpotsRepository, parkingReservationService);
         }
         #endregion
     }

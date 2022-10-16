@@ -6,6 +6,7 @@ namespace MySpot.Core.ValueObjects
     {
         public Guid Value { get; }
 
+
         public ParkingSpotId(Guid value)
         {
             if (value == Guid.Empty)
