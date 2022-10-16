@@ -1,5 +1,4 @@
 ﻿using MySpot.Application.Commands;
-using MySpot.Application.Services;
 using MySpot.Tests.Unit.Shared;
 using Shouldly;
 using System;

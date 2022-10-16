@@ -1,19 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MySpot.Application.Services;
+using MySpot.Application.Abstractions;
 using MySpot.Core.Abstractions;
-using MySpot.Core.Repositories;
 using MySpot.Infrastructure.DAL;
-using MySpot.Infrastructure.DAL.Repositories;
 using MySpot.Infrastructure.Exceptions;
 using MySpot.Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 //[assembly: InternalsVisibleTo("MySpot.Tests.Unit")]
 namespace MySpot.Infrastructure
@@ -29,7 +21,13 @@ namespace MySpot.Infrastructure
             services
                 .AddPostgres(configuration)
                 .AddSingleton<IClock, Clock>();
-                //.AddSingleton<IWeeklyParkingSpotRepository, InMemoryWeeklyParkingSpotRepository>();
+
+            var infrastructureAssembly = typeof(AppOptions).Assembly;
+            services.Scan(s => s.FromAssemblies(infrastructureAssembly)
+                .AddClasses(x => x.AssignableTo(typeof(IQueryHandler<,>)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
+            );
 
             return services;
         }

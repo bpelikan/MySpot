@@ -1,10 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MySpot.Application.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySpot.Application.Abstractions;
 
 namespace MySpot.Application
 {
@@ -12,7 +7,14 @@ namespace MySpot.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IReservationsService, ReservationsService>();
+            //var applicationAssembly = typeof(Extensions).Assembly;
+            var applicationAssembly = typeof(ICommandHandler<>).Assembly;
+
+            services.Scan(s => s.FromAssemblies(applicationAssembly)
+                .AddClasses(x => x.AssignableTo(typeof(ICommandHandler<>)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
+            );
             return services;
         }
     }
