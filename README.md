@@ -33,3 +33,10 @@ dotnet ef migrations add Introducing_Capacity --startup-project ../MySpot.Api/My
 cd ../MySpot.Api
 dotnet ef database update
 ```
+
+### 
+* https://datalust.co/seq
+* http://localhost:5341/
+```
+docker run --name seq -d --restart unless-stopped -e ACCEPT_EULA=Y -p 5341:80 datalust/seq:latest
+```

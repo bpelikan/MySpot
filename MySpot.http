@@ -23,15 +23,15 @@ Content-Type: application/json
   "capacity": 1,
   "employeeName": "Joe Doe",
   "licensePlate": "XYZ123",
-  "date": "2022-10-17"
+  "date": "2022-10-18"
 }
 
 ###
-POST {{url}}/parking-spots/cleaning
+POST {{url}}/parking-spots/reservations/cleaning
 Content-Type: application/json
 
 {
-  "date": "2022-10-14"
+  "date": "2022-10-18"
 }
 
 

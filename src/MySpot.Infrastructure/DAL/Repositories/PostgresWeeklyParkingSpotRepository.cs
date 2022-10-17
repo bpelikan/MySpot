@@ -54,9 +54,10 @@ namespace MySpot.Infrastructure.DAL.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task DeleteAsync(WeeklyParkingSpot weeklyParkingSpot)
+        public Task DeleteAsync(WeeklyParkingSpot weeklyParkingSpot)
         {
             _dbContext.Remove(weeklyParkingSpot);
+            return Task.CompletedTask;
         }
     }
 }

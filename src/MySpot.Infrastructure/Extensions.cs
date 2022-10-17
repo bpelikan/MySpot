@@ -5,6 +5,7 @@ using MySpot.Application.Abstractions;
 using MySpot.Core.Abstractions;
 using MySpot.Infrastructure.DAL;
 using MySpot.Infrastructure.Exceptions;
+using MySpot.Infrastructure.Logging;
 using MySpot.Infrastructure.Services;
 
 //[assembly: InternalsVisibleTo("MySpot.Tests.Unit")]
@@ -22,12 +23,14 @@ namespace MySpot.Infrastructure
                 .AddPostgres(configuration)
                 .AddSingleton<IClock, Clock>();
 
+
             var infrastructureAssembly = typeof(AppOptions).Assembly;
             services.Scan(s => s.FromAssemblies(infrastructureAssembly)
                 .AddClasses(x => x.AssignableTo(typeof(IQueryHandler<,>)))
                 .AsImplementedInterfaces()
-                .WithScopedLifetime()
-            );
+                .WithScopedLifetime());
+
+            services.AddCustomLogging();
 
             return services;
         }
