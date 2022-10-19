@@ -1,6 +1,26 @@
 @url = http://localhost:5000
 @reservationId = 00000000-0000-0000-0000-000000000001
 @parkingSpotId = 00000000-0000-0000-0000-000000000001
+@userId = 00000000-0000-0000-0000-000000000001
+
+
+###
+POST {{url}}/users
+Content-Type: application/json
+
+{
+  "email": "mail1@mail.com",
+  "username": "user1",
+  "password": "Password1",
+  "fullName": "John Doe",
+  "role": "user"
+}
+
+###
+GET {{url}}/users
+
+###
+GET {{url}}/users/{{userId}}
 
 
 ###
