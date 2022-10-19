@@ -13,8 +13,8 @@ namespace MySpot.Core.Entities
         {
         }
 
-        public CleaningReservation(ReservationId id, ParkingSpotId parkingSpotId, Capacity capacity, Date date) 
-            : base(id, parkingSpotId, capacity, date)
+        public CleaningReservation(ReservationId id, ParkingSpotId parkingSpotId, Date date) 
+            : base(id, parkingSpotId, capacity: WeeklyParkingSpot.MaxCapacity, date)
         {
         }
     }

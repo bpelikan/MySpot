@@ -41,7 +41,7 @@ Content-Type: application/json
 
 {
   "capacity": 1,
-  "employeeName": "Joe Doe",
+  "userId": "{{userId}}",
   "licensePlate": "XYZ123",
   "date": "2022-10-18"
 }
