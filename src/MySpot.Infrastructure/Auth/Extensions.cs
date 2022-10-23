@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using MySpot.Application.Security;
 using MySpot.Infrastructure.DAL;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace MySpot.Infrastructure.Auth
             var options = configuration.GetOption<AuthOptions>(SectionName);
 
             services
+                .AddSingleton<IAuthenticator, Authenticator>()
+                .AddSingleton<ITokenStorage, HttpContextTokenStorage>()
                 .AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -39,6 +42,7 @@ namespace MySpot.Infrastructure.Auth
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.SigningKey))
                     };
                 });
+            services.AddAuthorization();
 
             return services;
         }

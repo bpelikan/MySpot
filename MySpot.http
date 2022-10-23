@@ -17,7 +17,26 @@ Content-Type: application/json
 }
 
 ###
+# @name sign_in
+POST {{url}}/users/sign-in
+Content-Type: application/json
+
+{
+  "email": "mail1@mail.com",
+  "password": "Password1"
+}
+
+###
 GET {{url}}/users
+
+###
+GET {{url}}/users/jwt
+
+@accessToken = {{sign_in.response.body.$.accessToken}}
+
+###
+GET {{url}}/users/me
+Authorization: Bearer {{accessToken}}
 
 ###
 GET {{url}}/users/{{userId}}

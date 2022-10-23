@@ -22,6 +22,7 @@ namespace MySpot.Infrastructure
             services.AddSingleton<ExceptionMiddleware>();
             services.AddSecurity();
             services.AddAuth(configuration);
+            services.AddHttpContextAccessor();
 
             services
                 .AddPostgres(configuration)
@@ -43,6 +44,7 @@ namespace MySpot.Infrastructure
         {
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
             return app;
         }
