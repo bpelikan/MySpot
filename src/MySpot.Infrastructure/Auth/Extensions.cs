@@ -48,7 +48,7 @@ namespace MySpot.Infrastructure.Auth
                 Authorization.AddPolicy("is-admin", policy =>
                 {
                     policy.RequireRole("admin");
-                })
+                });
             });
 
             return services;
