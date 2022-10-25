@@ -27,12 +27,13 @@ Content-Type: application/json
 }
 
 ###
-GET {{url}}/users
-
-###
 GET {{url}}/users/jwt
 
 @accessToken = {{sign_in.response.body.$.accessToken}}
+
+###
+GET {{url}}/users
+Authorization: Bearer {{accessToken}}
 
 ###
 GET {{url}}/users/me
@@ -40,6 +41,9 @@ Authorization: Bearer {{accessToken}}
 
 ###
 GET {{url}}/users/{{userId}}
+Authorization: Bearer {{accessToken}}
+
+
 
 
 ###

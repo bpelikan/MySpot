@@ -7,6 +7,7 @@ using MySpot.Infrastructure.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,7 +43,13 @@ namespace MySpot.Infrastructure.Auth
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.SigningKey))
                     };
                 });
-            services.AddAuthorization();
+            services.AddAuthorization(Authorization =>
+            {
+                Authorization.AddPolicy("is-admin", policy =>
+                {
+                    policy.RequireRole("admin");
+                })
+            });
 
             return services;
         }
