@@ -46,19 +46,18 @@ namespace MySpot.Infrastructure.DAL.Repositories
         public async Task AddAsync(WeeklyParkingSpot weeklyParkingSpot)
         {
             await _dbContext.AddAsync(weeklyParkingSpot);
-            await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UdpadeAsync(WeeklyParkingSpot weeklyParkingSpot)
+        public Task UdpadeAsync(WeeklyParkingSpot weeklyParkingSpot)
         {
             _dbContext.Update(weeklyParkingSpot);
-            await _dbContext.SaveChangesAsync();
+            return Task.CompletedTask;
         }
 
-        public async Task DeleteAsync(WeeklyParkingSpot weeklyParkingSpot)
+        public Task DeleteAsync(WeeklyParkingSpot weeklyParkingSpot)
         {
             _dbContext.Remove(weeklyParkingSpot);
-            await _dbContext.SaveChangesAsync();
+            return Task.CompletedTask;
         }
     }
 }

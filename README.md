@@ -29,7 +29,15 @@ cd src/MySpot.Infrastructure
 dotnet ef migrations add Init -o ./DAL/Migrations --startup-project ../MySpot.Api
 dotnet ef migrations add Cleaning_Reservation --startup-project ../MySpot.Api/MySpot.Api.csproj --context MySpotDbContext -o ./DAL/Migrations
 dotnet ef migrations add Introducing_Capacity --startup-project ../MySpot.Api/MySpot.Api.csproj --context MySpotDbContext -o ./DAL/Migrations
+dotnet ef migrations add User --startup-project ../MySpot.Api/MySpot.Api.csproj --context MySpotDbContext -o ./DAL/Migrations
 
 cd ../MySpot.Api
 dotnet ef database update
+```
+
+### 
+* https://datalust.co/seq
+* http://localhost:5341/
+```
+docker run --name seq -d --restart unless-stopped -e ACCEPT_EULA=Y -p 5341:80 datalust/seq:latest
 ```

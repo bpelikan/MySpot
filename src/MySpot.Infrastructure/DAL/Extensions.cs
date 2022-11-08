@@ -1,8 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MySpot.Application.Abstractions;
+using MySpot.Application.Commands;
 using MySpot.Core.Repositories;
+using MySpot.Infrastructure.DAL.Decorators;
 using MySpot.Infrastructure.DAL.Repositories;
+using MySpot.Infrastructure.Logging.Decorators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +27,9 @@ namespace MySpot.Infrastructure.DAL
 
             services.AddDbContext<MySpotDbContext>(x => x.UseNpgsql(postgresOptions.ConnectionString));
             services.AddScoped<IWeeklyParkingSpotRepository, PostgresWeeklyParkingSpotRepository>();
+            services.AddScoped<IUserRepository, PostgresUserRepository>();
+            services.AddScoped<IUnitOfWork, PostgressUnitOfWork>();
+            services.TryDecorate(typeof(ICommandHandler<>), typeof(UnitOfWorkCommandHandlerDecorator<>));
             services.AddHostedService<DatabaseInitializer>();
             
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -30,13 +37,6 @@ namespace MySpot.Infrastructure.DAL
             return services;
         }
 
-        public static T GetOption<T>(this IConfiguration configuration, string sectionName) where T : class, new()
-        {
-            var options = new T();
-            var section = configuration.GetSection(sectionName);
-            section.Bind(options);
-
-            return options;
-        }    
+          
     }
 }

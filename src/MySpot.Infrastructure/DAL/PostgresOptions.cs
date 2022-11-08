@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MySpot.Infrastructure.DAL
 {
-    internal sealed class PostgresOptions
+    public sealed class PostgresOptions
     {
         public string ConnectionString { get; set; }
     }
