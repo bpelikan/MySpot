@@ -68,5 +68,14 @@ namespace MySpot.Infrastructure
 
             return app;
         }
+
+        public static T GetOption<T>(this IConfiguration configuration, string sectionName) where T : class, new()
+        {
+            var options = new T();
+            var section = configuration.GetSection(sectionName);
+            section.Bind(options);
+
+            return options;
+        }
     }
 }
